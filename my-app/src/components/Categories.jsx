@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { getCategoryId } from '../redux/slices/categorySlice'
+export const Categories = () => {
 
-export const Categories = ({ num, getCategoryId }) => {
-
-  const typesArr = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
-
-
+  const category = useSelector((store) => store.category)
+  const dispatch = useDispatch()
 
   return (
     <div className="categories">
       <ul>
-        {typesArr.map((type, i) => {
+        {category.typesArr.map((type, i) => {
           return <li
             key={i}
-            onClick={() => getCategoryId(i)}
+            onClick={() => dispatch(getCategoryId(i))}
             className=
-            {num === i ? 'active' : ''}>{type}</li>
+            {category.categoryId === i ? 'active' : ''}>{type}</li>
         }
         )}
       </ul>

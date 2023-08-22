@@ -14,12 +14,6 @@
 }
 
 .input-search {
-  &:hover {
-    width: 400px;
-    border: 2px solid black;
-    padding-left: 10%;
-  }
-
   box-size: border-box;
   font-weight: 700;
   font-size: 15px;
@@ -32,6 +26,12 @@
   border-radius: 15px;
   padding: 10px;
   padding-left: 12%;
+}
+
+.input-filled {
+  width: 400px;
+  border: 2px solid black;
+  padding-left: 10%;
 }
 
 .container:hover .placeholder {
@@ -58,5 +58,32 @@
   100% {
     opacity: 0;
     display: none;
+  }
+}
+
+.deleteImg {
+  cursor: pointer;
+  color: black;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  z-index: 1;
+}
+
+.container:hover .deleteImg {
+  animation: disappearanceX 2s ease-out 1;
+  animation-fill-mode: backwards;
+  backface-visibility: visible;
+}
+
+@keyframes disappearanceX {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

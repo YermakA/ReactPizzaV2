@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getSortType } from '../redux/slices/sortSlice'
 
-const Sort = ({ sortType, getSortType }) => {
 
+const Sort = () => {
 
-  const sortTypeArr = [{ name: 'популярности', typeProperty: 'rating' }, { name: 'цене', typeProperty: 'price' }, { name: 'алфавиту', typeProperty: 'title' }]
+  const dispatch = useDispatch()
+  const object = useSelector((store) => store.sort)
   const [view, changeView] = useState(false)
 
   return (
@@ -23,15 +26,16 @@ const Sort = ({ sortType, getSortType }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => changeView((prevView) => !prevView)}>{sortType.name}</span>
+        <span onClick={() => changeView((prevView) => !prevView)}>{object.currentType.name}</span>
       </div>
       {view &&
         <div className="sort__popup">
           <ul>
-            {sortTypeArr.map((obj, i) => <li
+            {object.sortTypeArr.map((obj, i) => <li
               key={i}
-              onClick={() => getSortType(obj)}
-              className={sortType === i ? "active" : ""}>{obj.name}</li>)}
+              onClick={() => dispatch(getSortType(obj))}
+              className={object.currentType.name === obj.name
+                ? "active" : ""}>{obj.name}</li>)}
           </ul>
         </div>
       }

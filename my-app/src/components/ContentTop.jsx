@@ -1,12 +1,12 @@
 import Categories from './Categories'
 import Sort from './Sort'
-const ContentTop = ({ sortType, num, getCategoryId, getSortType }) => {
+const ContentTop = () => {
 
 
   return (
     <div className="content__top">
-      <Categories num={num} getCategoryId={getCategoryId} />
-      <Sort sortType={sortType} getSortType={getSortType} />
+      <Categories />
+      <Sort />
     </div>
   )
 }
