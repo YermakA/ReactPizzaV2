@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   pizzasArr: [],
   totalAmount: 0,
+  totalPrice: 0
 }
 
 const cartSlice = createSlice({
@@ -19,9 +20,11 @@ const cartSlice = createSlice({
       if (indexIsExist >= 0) {
         state.pizzasArr[indexIsExist].amount += 1
         state.totalAmount += 1
+        state.totalPrice += payload.price
       } else {
-        state.pizzasArr.push(action.payload)
+        state.pizzasArr.push(payload)
         state.totalAmount += 1
+        state.totalPrice += payload.price
       }
     }
   }
