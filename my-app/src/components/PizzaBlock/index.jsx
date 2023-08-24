@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-
+import { addItem } from '../../redux/slices/cartSlice'
+import { useDispatch, useSelector } from "react-redux";
+import totalAmountById from '../../utils/totalAmountById'
 export const PizzaBlock = ({
+  id,
   imageUrl,
   title,
   types,
@@ -9,9 +12,14 @@ export const PizzaBlock = ({
   category,
   rating }) => {
 
+  const pizzasArr = useSelector(store => store.cart.pizzasArr)
+
+  const dispatch = useDispatch()
+
   const pizzaTypeArr = ['тонкое', 'традиционное']
-  const [pizzaSize, setSize] = useState(0);
-  const [pizzaType, setType] = useState(0);
+  const [pizzaSizeIndex, setSizeIndex] = useState(0);
+  const [pizzaTypeIndex, setTypeIndex] = useState(0);
+
   return (
     <div className="pizza-block">
       <img
@@ -24,8 +32,10 @@ export const PizzaBlock = ({
         <ul>
           {types.map((index) => <li
             key={index}
-            onClick={() => setType(index)}
-            className={index === pizzaType ? 'active' : ''}>{pizzaTypeArr[index]}</li>)}
+            onClick={() => {
+              setTypeIndex(index)
+            }}
+            className={index === pizzaTypeIndex ? 'active' : ''}>{pizzaTypeArr[index]}</li>)}
 
 
         </ul>
@@ -33,8 +43,8 @@ export const PizzaBlock = ({
           {sizes.map((size, i) =>
             <li
               key={i}
-              onClick={() => setSize(i)}
-              className={i === pizzaSize ? 'active' : ''}
+              onClick={() => setSizeIndex(i)}
+              className={i === pizzaSizeIndex ? 'active' : ''}
             >{size} см.</li>
           )}
 
@@ -43,7 +53,21 @@ export const PizzaBlock = ({
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <div onClick={() => {
+          dispatch(addItem({
+            id,
+            imageUrl,
+            title,
+            sizes,
+            types,
+            pizzaTypeIndex,
+            pizzaSizeIndex,
+            price,
+            category,
+            rating,
+            amount: 1
+          }))
+        }} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -57,7 +81,7 @@ export const PizzaBlock = ({
             />
           </svg>
           <span>Добавить</span>
-          <i>0</i>
+          <i> {totalAmountById(pizzasArr, id).amount}</i>
         </div>
       </div>
     </div >
