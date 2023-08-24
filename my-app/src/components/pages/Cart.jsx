@@ -2,17 +2,29 @@ import React from 'react'
 import style from './Cart.module.scss'
 import { Link } from "react-router-dom"
 import CartItem from './CartItem'
-import { useSelector } from 'react-redux'
+import trash from '../../assets/img/trash.svg'
+import { clearAllItems } from '../../redux/slices/cartSlice'
+import { useSelector, useDispatch } from 'react-redux'
 export const Cart = () => {
 
   const cart = useSelector(store => store.cart)
-
+  const dispatch = useDispatch()
   return (
 
     <div className="container">
+      {cart.pizzasArr.length !== 0 ? <div className={style['trash-clear']} >
+        <div onClick={() => dispatch(clearAllItems())} className={style['trash-clear-in']}>
+          <span className={style['trash-text']}>Очистить корзину</span>
+          <img className={style.trash} src={trash} alt="мусорная корзина" />
+        </div>
+      </div>
+        : ""
+      }
+
       <div class={style.contentItems}>
         {cart.pizzasArr.map(pizza => <CartItem
           key={pizza.id}
+          types={cart.pizzaTypeArr}
           pizza={pizza}
         />)}
 

@@ -59,10 +59,10 @@ export const PizzaBlock = ({
             imageUrl,
             title,
             sizes,
-            types,
             pizzaTypeIndex,
             pizzaSizeIndex,
             price,
+            itemPrice: price,
             category,
             rating,
             amount: 1

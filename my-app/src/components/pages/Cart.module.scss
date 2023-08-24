@@ -16,3 +16,35 @@
   margin-top: 40px;
   padding-bottom: 50px;
 }
+
+.trash-clear{
+  
+ position: relative;
+ height: 30px;
+}
+.trash-clear-in{
+  top: -2px;
+  right: 60px;
+  width: 250px;
+  height: 30px;
+  position: absolute;
+}
+.trash-text{
+
+  cursor: pointer;
+  position: relative;
+  font-size: 18px;
+  top: -4px;
+  right: 3px;
+  color: rgb(176, 176, 176);
+}
+
+.trash{
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+  
+  width: 24px;
+  height: 24px;
+  color: black;
+}
