@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSortType } from '../redux/slices/sortSlice'
 
 
 const Sort = () => {
+  const sortRef = useRef()
+
 
   const dispatch = useDispatch()
   const object = useSelector((store) => store.sort)
   const [view, changeView] = useState(false)
+
+  useEffect(() => {
+    const body = document.querySelector('body')
+    const popupHandler = (e) => {
+      console.log(1)
+      if (e.target !== sortRef.current) {
+        changeView(false)
+      }
+    }
+    body.addEventListener('click', popupHandler)
+    return () => {
+      body.removeEventListener('click', popupHandler)
+    }
+  }, [])
 
   return (
     <div className="sort">
@@ -26,7 +42,7 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => changeView((prevView) => !prevView)}>{object.currentType.name}</span>
+        <span ref={sortRef} onClick={() => changeView((prevView) => !prevView)}>{object.currentType.name}</span>
       </div>
       {view &&
         <div className="sort__popup">
