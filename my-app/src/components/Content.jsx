@@ -24,11 +24,12 @@ export const Content = () => {
       const params = getObjFromQs(window.location.search)
       dispatch(getCurrentType(params.sortProperty))
       dispatch(getCategoryId(+params.categoryId))
-      firstLoading.current = false
+      firstLoading.current = true
     }
   }, [])
 
   useEffect(() => {
+
     if (firstLoading.current) {
       const category = categoryId !== 0 ? categoryId : ''
       const sort = currentType ? `&sortby=${currentType}` : ''
@@ -39,6 +40,7 @@ export const Content = () => {
 
   useEffect(() => {
     if (showLinkRef.current === true) {
+
       navigate(getQsAttr(currentType, categoryId))
     }
     showLinkRef.current = true
