@@ -14,7 +14,6 @@ const Sort = () => {
   useEffect(() => {
     const body = document.querySelector('body')
     const popupHandler = (e) => {
-      console.log(1)
       if (e.target !== sortRef.current) {
         changeView(false)
       }

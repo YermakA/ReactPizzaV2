@@ -2,7 +2,7 @@ import React, { useCallback, useState, useRef } from 'react'
 import style from './InputSearch.module.scss'
 import zoom from '../assets/img/zoom.svg'
 import deleteImg from '../assets/img/delete.svg'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { inputWord } from '../redux/slices/searchSlice'
 import debounce from "lodash.debounce"
 

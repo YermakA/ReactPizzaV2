@@ -1,19 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ContentTop from "./ContentTop"
 import PizzaBlock from "./PizzaBlock"
 import PizzaSkeleton from './PizzaBlock/PizzaSkeleton'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 import { getCategoryId } from '../redux/slices/categorySlice'
 import { getCurrentType } from '../redux/slices/sortSlice.js'
 import { getQsAttr, getObjFromQs } from '../utils/createQueryString'
 import { useNavigate } from 'react-router-dom'
+import { fetchPizzas } from '../redux/slices/pizzaSlice'
 export const Content = () => {
   const dispatch = useDispatch()
   const showLinkRef = useRef(false)
   const firstLoading = useRef(true)
-  const [pizzaProps, setPizzaProps] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { pizzaProps, status } = useSelector((store) => store.pizza)
   const currentType = useSelector((store) => store.sort.currentType.typeProperty)
   const categoryId = useSelector((store) => store.category.categoryId)
   const pizzaName = useSelector((store) => store.search.word)
@@ -22,7 +21,6 @@ export const Content = () => {
   useEffect(() => {
 
     if (window.location.search) {
-      console.log('2')
       const params = getObjFromQs(window.location.search)
       dispatch(getCurrentType(params.sortProperty))
       dispatch(getCategoryId(+params.categoryId))
@@ -32,15 +30,9 @@ export const Content = () => {
 
   useEffect(() => {
     if (firstLoading.current) {
-      setIsLoading(true)
       const category = categoryId !== 0 ? categoryId : ''
       const sort = currentType ? `&sortby=${currentType}` : ''
-      axios.get(`https://64de1ae9825d19d9bfb213b0.mockapi.io/items/?category=${category}${sort}`)
-        .then(res => {
-          setPizzaProps(res.data)
-          setIsLoading(false)
-        }
-        )
+      dispatch(fetchPizzas({ category, sort }))
     }
     firstLoading.current = true
   }, [categoryId, currentType, pizzaName])
@@ -78,12 +70,17 @@ export const Content = () => {
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
           {
-            isLoading ?
+            status === "loading" ?
               skeletons :
               pizzaName === '' ?
                 pizzas : filteredPizzas
           }
-
+          {
+            status === "rejected" &&
+            <h1>
+              Возникла ошибка загрузки...
+            </h1>
+          }
         </div>
       </div>
     </div>
