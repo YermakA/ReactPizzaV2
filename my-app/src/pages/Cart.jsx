@@ -2,8 +2,8 @@ import React from 'react'
 import style from './Cart.module.scss'
 import { Link } from "react-router-dom"
 import CartItem from './CartItem'
-import trash from '../../assets/img/trash.svg'
-import { clearAllItems } from '../../redux/slices/cartSlice'
+import trash from '../assets/img/trash.svg'
+import { clearAllItems } from '../redux/slices/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 export const Cart = () => {
 

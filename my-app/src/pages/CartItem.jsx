@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { clearItem, decrementItem, incrementItem } from '../../redux/slices/cartSlice'
+import { clearItem, decrementItem, incrementItem } from '../redux/slices/cartSlice'
 const CartItem = ({ pizza, types }) => {
 
   const dispatch = useDispatch()
