@@ -8,7 +8,7 @@ import debounce from "lodash.debounce"
 
 const InputSearch = () => {
   const [name, setName] = useState('')
-  const nameRef = useRef()
+  const nameRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
   const searchDebounce = useCallback(debounce((str) => {
     dispatch(inputWord(str))

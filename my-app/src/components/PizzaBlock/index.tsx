@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { addItem } from '../../redux/slices/cartSlice'
 import { useDispatch, useSelector } from "react-redux";
 import totalAmountById from '../../utils/totalAmountById'
+import { RootState } from "../../redux/store"
+import ICartSlice from "../../redux/slices/ICartSlice"
 export const PizzaBlock = ({
   id,
   imageUrl,
@@ -12,7 +14,7 @@ export const PizzaBlock = ({
   category,
   rating }) => {
 
-  const pizzasArr = useSelector(store => store.cart.pizzasArr)
+  const pizzasArr = useSelector<RootState, ICartSlice["pizzasArr"]>(store => store.cart.pizzasArr)
 
   const dispatch = useDispatch()
 

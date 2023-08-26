@@ -3,10 +3,12 @@ import pizzaLogo from '../assets/img/pizza-logo.svg'
 import { Link } from 'react-router-dom'
 import InputSearch from './InputSearch'
 import { useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+import ICartSlice from "../redux/slices/ICartSlice"
 
 export const Header = () => {
 
-  const cart = useSelector(store => store.cart)
+  const cart = useSelector<RootState, ICartSlice>(store => store.cart)
 
   return (
     <div className="header">

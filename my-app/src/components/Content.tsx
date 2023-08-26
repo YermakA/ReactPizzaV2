@@ -1,21 +1,26 @@
-import React, { useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import ContentTop from "./ContentTop"
 import PizzaBlock from "./PizzaBlock"
 import PizzaSkeleton from './PizzaBlock/PizzaSkeleton'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCategoryId } from '../redux/slices/categorySlice'
-import { getCurrentType } from '../redux/slices/sortSlice.js'
+import { getCurrentType } from '../redux/slices/sortSlice'
 import { getQsAttr, getObjFromQs } from '../utils/createQueryString'
 import { useNavigate } from 'react-router-dom'
 import { fetchPizzas } from '../redux/slices/pizzaSlice'
-export const Content = () => {
-  const dispatch = useDispatch()
+import { AppDispatch, RootState } from "../redux/store"
+import IPizzaSlice from "../redux/slices/IPizzaSlice"
+import ISortSlice from "../redux/slices/ISortSlice"
+import ICategorySlice from "../redux/slices/ICategorySlice"
+import ISearchSlice from "../redux/slices/ISearchSlice"
+export const Content: FC = () => {
+  const dispatch = useDispatch<AppDispatch>()
   const showLinkRef = useRef(false)
   const firstLoading = useRef(true)
-  const { pizzaProps, status } = useSelector((store) => store.pizza)
-  const currentType = useSelector((store) => store.sort.currentType.typeProperty)
-  const categoryId = useSelector((store) => store.category.categoryId)
-  const pizzaName = useSelector((store) => store.search.word)
+  const { pizzaProps, status } = useSelector<RootState, IPizzaSlice>((store) => store.pizza)
+  const currentType = useSelector < RootState, ISortSlice["currentType"]["typeProperty"]>((store) => store.sort.currentType.typeProperty)
+  const categoryId = useSelector<RootState, ICategorySlice["categoryId"]>((store) => store.category.categoryId)
+  const pizzaName = useSelector<RootState,ISearchSlice["word"] >((store) => store.search.word)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -23,7 +28,7 @@ export const Content = () => {
     if (window.location.search) {
       const params = getObjFromQs(window.location.search)
       dispatch(getCurrentType(params.sortProperty))
-      dispatch(getCategoryId(+params.categoryId))
+      dispatch(getCategoryId(+params.categoryId!))
       firstLoading.current = true
     }
   }, [])

@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSortType } from '../redux/slices/sortSlice'
-
+import {RootState} from '../redux/store'
+import ISortSlice from "../redux/slices/ISortSlice"
 
 const Sort = () => {
-  const sortRef = useRef()
+  const sortRef = useRef(null)
 
 
   const dispatch = useDispatch()
-  const object = useSelector((store) => store.sort)
+  const object = useSelector<RootState,ISortSlice >((store) => store.sort)
   const [view, changeView] = useState(false)
 
   useEffect(() => {
@@ -18,9 +19,11 @@ const Sort = () => {
         changeView(false)
       }
     }
-    body.addEventListener('click', popupHandler)
-    return () => {
-      body.removeEventListener('click', popupHandler)
+    if ( body !== null) {
+      body.addEventListener('click', popupHandler)
+      return () => {
+        body.removeEventListener('click', popupHandler)
+      }
     }
   }, [])
 

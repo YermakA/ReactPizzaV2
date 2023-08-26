@@ -6,7 +6,8 @@ import { NotFound } from './pages/NotFound'
 import { Cart } from './pages/Cart'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-function App() {
+import React, {  ReactElement } from "react"
+function App(): ReactElement {
 
 
   return (

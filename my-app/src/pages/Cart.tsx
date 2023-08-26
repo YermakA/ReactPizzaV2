@@ -5,9 +5,12 @@ import CartItem from './CartItem'
 import trash from '../assets/img/trash.svg'
 import { clearAllItems } from '../redux/slices/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from "../redux/store"
+import ICartSlice from "../redux/slices/ICartSlice"
 export const Cart = () => {
 
-  const cart = useSelector(store => store.cart)
+  const cart = useSelector<RootState, ICartSlice>(store => store.cart)
+  
   const dispatch = useDispatch()
   return (
 
@@ -21,7 +24,7 @@ export const Cart = () => {
         : ""
       }
 
-      <div class={style.contentItems}>
+      <div className={style.contentItems}>
         {cart.pizzasArr.map(pizza => <CartItem
           key={pizza.id}
           types={cart.pizzaTypeArr}
@@ -30,20 +33,20 @@ export const Cart = () => {
 
 
       </div>
-      <div class="cart__bottom">
-        <div class="cart__bottom-details">
+      <div className="cart__bottom">
+        <div className="cart__bottom-details">
           <span> Всего пицц: <b>{cart.totalAmount} шт.</b> </span>
           <span> Сумма заказа: <b>{cart.totalPrice} ₽</b> </span>
         </div>
-        <div class={style['cart__bottom-buttons']}  >
-          <Link to="/" class="button button--outline button--add go-back-btn">
+        <div className={style['cart__bottom-buttons']}  >
+          <Link to="/" className="button button--outline button--add go-back-btn">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
 
             <span>Вернуться назад</span>
           </Link>
-          <div class="button pay-btn">
+          <div className="button pay-btn">
             <span>Оплатить сейчас</span>
           </div>
         </div>

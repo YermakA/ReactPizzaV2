@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategoryId } from '../redux/slices/categorySlice'
-export const Categories = () => {
+import { RootState } from "../redux/store"
+import ICategorySlice from "../redux/slices/ICategorySlice"
+export const Categories: FC = () => {
 
-  const category = useSelector((store) => store.category)
+  const category = useSelector<RootState, ICategorySlice>((store) => store.category)
   const dispatch = useDispatch()
 
   return (
