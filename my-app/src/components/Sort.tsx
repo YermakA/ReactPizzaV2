@@ -4,7 +4,7 @@ import { getSortType } from '../redux/slices/sortSlice'
 import {RootState} from '../redux/store'
 import ISortSlice from "../redux/slices/ISortSlice"
 
-const Sort = () => {
+const Sort = React.memo(() => {
   const sortRef = useRef(null)
 
 
@@ -59,6 +59,6 @@ const Sort = () => {
       }
     </div>
   )
-}
+}) 
 
 export default Sort
