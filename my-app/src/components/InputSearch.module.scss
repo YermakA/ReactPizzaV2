@@ -1,0 +1,89 @@
+.container {
+  position: relative;
+  left: -140px;
+}
+
+.zoom {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+  color: black;
+}
+
+.input-search {
+  box-size: border-box;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.8s ease-in-out;
+  backface-visibility: visible;
+  border: 1px solid black;
+  opacity: 0.3;
+  padding-left: 40px;
+  width: 300px;
+  border-radius: 15px;
+  padding: 10px;
+  padding-left: 12%;
+}
+
+.input-filled {
+  width: 400px;
+  border: 2px solid black;
+  padding-left: 10%;
+}
+
+.container:hover .placeholder {
+  animation: disappearance 1s ease 1;
+  animation-fill-mode: forwards;
+  backface-visibility: visible;
+}
+
+.placeholder {
+  font-size: 15px;
+  position: absolute;
+  left: 35px;
+  top: 12px;
+  opacity: 0.3;
+}
+
+@keyframes disappearance {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.deleteImg {
+  cursor: pointer;
+  color: black;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  z-index: 1;
+}
+
+.container:hover .deleteImg {
+  animation: disappearanceX 2s ease-out 1;
+  animation-fill-mode: backwards;
+  backface-visibility: visible;
+}
+
+@keyframes disappearanceX {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
