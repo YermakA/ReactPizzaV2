@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import ICartSlice from "../redux/slices/ICartSlice"
 
-export const Header = () => {
+export const Header: React.FC = () => {
 
   const cart = useSelector<RootState, ICartSlice>(store => store.cart)
 

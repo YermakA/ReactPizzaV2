@@ -4,7 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import totalAmountById from '../../utils/totalAmountById'
 import { RootState } from "../../redux/store"
 import ICartSlice from "../../redux/slices/ICartSlice"
-export const PizzaBlock = ({
+
+interface IPizzaBlock {
+  id: string
+  imageUrl: string
+  title: string
+  types: number[]
+  sizes: string[]
+  price: string
+  category: string
+  rating: string
+}
+
+
+export const PizzaBlock: React.FC = ({
   id,
   imageUrl,
   title,
@@ -12,7 +25,7 @@ export const PizzaBlock = ({
   sizes,
   price,
   category,
-  rating }) => {
+  rating }:IPizzaBlock ) => {
 
   const pizzasArr = useSelector<RootState, ICartSlice["pizzasArr"]>(store => store.cart.pizzasArr)
 
